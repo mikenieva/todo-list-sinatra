@@ -1,0 +1,9 @@
+<!-- 
+Much like new.erb, delete.erb features a basic HTML form, but you’ll see it has a hidden value – _method – to enforce the delete method. It also returns the to-do item contents before the form, to confirm the correct item will get deleted.
+-->
+ <p>Are you sure you want to delete:</p>
+<blockquote><p><%= @item.content %></p></blockquote>
+<form action="/delete/<%= @item.id %>" method="POST">
+  <button type="submit" class="btn btn-primary" name="ok">OK</button>
+  <button type="submit" class="btn" name="cancel">Cancel</button>
+</form>

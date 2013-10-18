@@ -1,0 +1,24 @@
+<!-- 
+In this view, the basic HTML is created for the content output. The erb tags allow bits of Ruby to be injected into the layout. @item.each is used to loop through all to-do items. Inside it, the different elements of the to-do item are returned using erb expression tags.
+
+To denote that a to-do item is done, HTML <del> tags are added to the item content and the ‘done’ button text is changed to ‘not done’, which allows a done item to be undone. In order to implement this, a ternary operator is used. This creates the different states depending on whether the to-do item has been marked as done.
+
+The reason that we have so little HTML in this view is because most of it is in the layout. Sinatra enables you to create a view called layout – followed by the extension of the template language being used – in this case, layout.erb. This file is then loaded for all views.
+
+-->
+
+<ul id="todo-list" class="unstyled">
+<% @items.each do |item| %>
+	<li id="<%= item[:id] %>">
+	<span class="item">
+	<%= item[:done] ? "<del>#{item[:content]}</del>" : item[:content] %>
+
+  	</span>
+  	<span class="pull-right">
+  	<a href="#" class="btn done"><%= item[:done] ? "Not done" : "Done"%></a>
+  	<a href="/delete/<%= item[:id] %>" class="btn btn-danger">Delete</a>
+  	</span>
+  	</li>
+  	<% end %>
+  	</ul>
+  	<a href="/new" class="btn btn-primary">Add todo item</a>
